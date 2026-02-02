@@ -1,7 +1,12 @@
 import '@datavant/dart/styles.layer.css';
-import { Stack, Title, Text, Card, Badge, Grid, Box, Group, Button } from '@mantine/core';
-import { DatavantProvider, SideNav, NavItem } from '@datavant/dart';
+import { Stack, Title, Card, Grid, Box, Group } from '@mantine/core';
 import {
+  DatavantProvider,
+  SideNav,
+  NavItem,
+  Button,
+  Text,
+  Badge,
   SearchIcon,
   FolderIcon,
   FileCabinetIcon,
