@@ -1,4 +1,4 @@
-import '@datavant/dart/styles.layer.css';
+import '@datavant/dart/styles.css';
 import { Stack, Title, Card, Grid, Box, Group } from '@mantine/core';
 import {
   DatavantProvider,
