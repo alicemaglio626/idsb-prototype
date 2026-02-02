@@ -60,10 +60,18 @@ function App() {
                 Search and explore healthcare data sources for your research
               </Text>
               <Group gap="md">
-                <Button>Primary Button</Button>
-                <Button variant="outline">Outline Button</Button>
-                <Button variant="subtle">Subtle Button</Button>
-                <Button variant="light">Light Button</Button>
+                <Button intent="prominent" appearance="solid">
+                  Primary Button
+                </Button>
+                <Button intent="prominent" appearance="outline">
+                  Outline Button
+                </Button>
+                <Button intent="neutral" appearance="outline">
+                  Neutral Button
+                </Button>
+                <Button intent="negative" appearance="solid">
+                  Negative Button
+                </Button>
               </Group>
             </div>
 
