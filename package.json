@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@datavant/dart": "^0.79.35",
+    "@datavant/design-tokens": "^0.2.9",
     "@mantine/core": "^8.3.14",
     "@mantine/dates": "^8.3.14",
     "@mantine/hooks": "^8.3.14",

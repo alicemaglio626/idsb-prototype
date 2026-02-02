@@ -1,5 +1,6 @@
+import '@datavant/design-tokens/dist/generated/light.css';
 import '@datavant/dart/styles.layer.css';
-import { Stack, Title, Text, Card, Badge, Grid, Box, Group } from '@mantine/core';
+import { Stack, Title, Text, Card, Badge, Grid, Box, Group, Button } from '@mantine/core';
 import { DatavantProvider, SideNav, NavItem } from '@datavant/dart';
 import {
   SearchIcon,
@@ -51,9 +52,15 @@ function App() {
               <Title order={1} mb="xs">
                 Data Discovery
               </Title>
-              <Text size="lg" c="dimmed">
+              <Text size="lg" c="dimmed" mb="md">
                 Search and explore healthcare data sources for your research
               </Text>
+              <Group gap="md">
+                <Button>Primary Button</Button>
+                <Button variant="outline">Outline Button</Button>
+                <Button variant="subtle">Subtle Button</Button>
+                <Button variant="light">Light Button</Button>
+              </Group>
             </div>
 
             <Grid>
