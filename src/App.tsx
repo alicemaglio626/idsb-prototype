@@ -1,4 +1,3 @@
-import '@datavant/design-tokens/dist/generated/light.css';
 import '@datavant/dart/styles.layer.css';
 import { Stack, Title, Text, Card, Badge, Grid, Box, Group, Button } from '@mantine/core';
 import { DatavantProvider, SideNav, NavItem } from '@datavant/dart';
