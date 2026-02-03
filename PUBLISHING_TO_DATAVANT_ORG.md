@@ -4,8 +4,8 @@ This document outlines the steps to move this template from personal account to 
 
 ## Current Status
 
-- **Current Location**: https://github.com/ernieguai/datavant-prototype
-- **Target Location**: https://github.com/datavant/prototype-template (or similar)
+- **Current Location**: https://github.com/datavant/design-prototype
+- **Target Location**: https://github.com/datavant/design-prototype (or similar)
 - **Visibility**: Internal (private to Datavant organization members)
 - **Status**: 🚧 Ready to publish after initial prototype validation
 
@@ -50,7 +50,7 @@ Before moving to Datavant org:
 This preserves all history, issues, and stars.
 
 1. **In Current Repo Settings**
-   - Go to https://github.com/ernieguai/datavant-prototype/settings
+   - Go to https://github.com/datavant/design-prototype/settings
    - Scroll to "Danger Zone"
    - Click "Transfer ownership"
    - Enter: `datavant` (org name)
@@ -69,7 +69,7 @@ This starts fresh without personal account history.
 
 1. **Create in Datavant Org**
    - Go to https://github.com/organizations/datavant/repositories/new
-   - Name: `prototype-template` (or chosen name)
+   - Name: `design-prototype` (or chosen name)
    - Description: "Template repository for building Datavant product prototypes"
    - Visibility: **Internal** (visible to all Datavant members)
    - Don't initialize (we'll push existing code)
@@ -77,7 +77,7 @@ This starts fresh without personal account history.
 2. **Push Existing Code**
    ```bash
    cd /Users/ernie.guaimano/Documents/Github/datavant-prototype
-   git remote add datavant https://github.com/datavant/prototype-template.git
+   git remote add datavant https://github.com/datavant/design-prototype.git
    git push datavant main
    ```
 
@@ -91,12 +91,12 @@ This starts fresh without personal account history.
 
 ## Suggested Repository Names
 
-- `prototype-template` (clear and descriptive)
-- `dart-prototype-template` (emphasizes Dart usage)
-- `design-prototype-template` (emphasizes design focus)
+- `design-prototype` (clear and descriptive)
+- `dart-design-prototype` (emphasizes Dart usage)
+- `design-design-prototype` (emphasizes design focus)
 - `quick-prototype` (emphasizes speed)
 
-**Recommendation**: `prototype-template`
+**Recommendation**: `design-prototype`
 
 ## Repository Settings
 
@@ -142,7 +142,7 @@ GitHub supports "Internal" visibility for enterprise organizations:
 ```bash
 # Find all references to old URL
 cd /path/to/datavant-prototype
-grep -r "ernieguai/datavant-prototype" .
+grep -r "datavant/design-prototype" .
 
 # Update to new URL (do this before or after transfer)
 # Use text editor or Claude to update all references
@@ -177,7 +177,7 @@ When publishing, update these URLs:
 
 ### Current References to Update
 ```
-ernieguai/datavant-prototype → datavant/prototype-template
+datavant/design-prototype → datavant/design-prototype
 ```
 
 Files containing references:
@@ -192,8 +192,8 @@ Files containing references:
 #!/bin/bash
 # Run this in the repo root before publishing
 
-OLD_URL="ernieguai/datavant-prototype"
-NEW_URL="datavant/prototype-template"
+OLD_URL="datavant/design-prototype"
+NEW_URL="datavant/design-prototype"
 
 # Update all markdown files
 find . -name "*.md" -type f -exec sed -i '' "s|$OLD_URL|$NEW_URL|g" {} +
