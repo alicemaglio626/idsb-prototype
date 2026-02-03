@@ -4,8 +4,8 @@ This document outlines the steps to move this template from personal account to 
 
 ## Current Status
 
-- **Current Location**: https://github.com/datavant/design-prototype
-- **Target Location**: https://github.com/datavant/design-prototype (or similar)
+- **Current Location**: https://github.com/datavant/design-prototype-template
+- **Target Location**: https://github.com/datavant/design-prototype-template (or similar)
 - **Visibility**: Internal (private to Datavant organization members)
 - **Status**: 🚧 Ready to publish after initial prototype validation
 
@@ -50,7 +50,7 @@ Before moving to Datavant org:
 This preserves all history, issues, and stars.
 
 1. **In Current Repo Settings**
-   - Go to https://github.com/datavant/design-prototype/settings
+   - Go to https://github.com/datavant/design-prototype-template/settings
    - Scroll to "Danger Zone"
    - Click "Transfer ownership"
    - Enter: `datavant` (org name)
@@ -77,7 +77,7 @@ This starts fresh without personal account history.
 2. **Push Existing Code**
    ```bash
    cd /Users/ernie.guaimano/Documents/Github/datavant-prototype
-   git remote add datavant https://github.com/datavant/design-prototype.git
+   git remote add datavant https://github.com/datavant/design-prototype-template.git
    git push datavant main
    ```
 
@@ -142,7 +142,7 @@ GitHub supports "Internal" visibility for enterprise organizations:
 ```bash
 # Find all references to old URL
 cd /path/to/datavant-prototype
-grep -r "datavant/design-prototype" .
+grep -r "datavant/design-prototype-template" .
 
 # Update to new URL (do this before or after transfer)
 # Use text editor or Claude to update all references
@@ -177,7 +177,7 @@ When publishing, update these URLs:
 
 ### Current References to Update
 ```
-datavant/design-prototype → datavant/design-prototype
+datavant/design-prototype-template → datavant/design-prototype-template
 ```
 
 Files containing references:
@@ -192,8 +192,8 @@ Files containing references:
 #!/bin/bash
 # Run this in the repo root before publishing
 
-OLD_URL="datavant/design-prototype"
-NEW_URL="datavant/design-prototype"
+OLD_URL="datavant/design-prototype-template"
+NEW_URL="datavant/design-prototype-template"
 
 # Update all markdown files
 find . -name "*.md" -type f -exec sed -i '' "s|$OLD_URL|$NEW_URL|g" {} +

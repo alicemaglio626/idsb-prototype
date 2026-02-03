@@ -293,7 +293,7 @@ How do we know this is working?
 
 ## Repository Information
 
-- **Repository**: https://github.com/datavant/design-prototype (will move to Datavant org)
+- **Repository**: https://github.com/datavant/design-prototype-template (will move to Datavant org)
 - **Dart Design System**: https://github.com/datavant/dart
 - **Dart Storybook**: https://datavant.github.io/dart-storybook/main
 

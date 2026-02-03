@@ -6,7 +6,7 @@ This guide helps designers and product managers create a new prototype using thi
 
 ### Using GitHub (Easiest)
 
-1. Go to https://github.com/datavant/design-prototype
+1. Go to https://github.com/datavant/design-prototype-template
 2. Click the green **"Use this template"** button (top right)
 3. Name your new repo: `{product}-prototype`
    - Examples: `connect-prototype`, `trials-prototype`, `platform-vision-prototype`
@@ -18,7 +18,7 @@ This guide helps designers and product managers create a new prototype using thi
 
 ```bash
 # Clone the template
-git clone https://github.com/datavant/design-prototype.git my-prototype
+git clone https://github.com/datavant/design-prototype-template.git my-prototype
 cd my-prototype
 
 # Remove the connection to the template repo

@@ -65,7 +65,7 @@ Sharing these discoveries helps all teams build better prototypes faster.
 **For documentation improvements, pattern descriptions, and examples:**
 
 1. **Create an Issue** on the base template repo
-   - Go to https://github.com/datavant/design-prototype/issues
+   - Go to https://github.com/datavant/design-prototype-template/issues
    - Click "New Issue"
    - Describe what you learned/discovered
 
@@ -222,7 +222,7 @@ After improvements are merged into the base template, you can pull them into you
 cd path/to/your-prototype
 
 # Add base template as remote (one time only)
-git remote add template https://github.com/datavant/design-prototype.git
+git remote add template https://github.com/datavant/design-prototype-template.git
 
 # Fetch latest from template
 git fetch template
@@ -246,7 +246,7 @@ In your prototype's Claude Code chat:
 
 ```
 I want to sync updates from the base template repository.
-The template repo is at: https://github.com/datavant/design-prototype
+The template repo is at: https://github.com/datavant/design-prototype-template
 
 Please help me:
 1. Add the template as a remote

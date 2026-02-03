@@ -110,7 +110,7 @@ I need to sync updates from the base datavant-prototype template into
 my prototype repository.
 
 My prototype repo: {path-to-your-prototype-repo}
-Base template repo: https://github.com/datavant/design-prototype
+Base template repo: https://github.com/datavant/design-prototype-template
 
 Please help me:
 1. Add the template repo as a git remote (if not already added)
