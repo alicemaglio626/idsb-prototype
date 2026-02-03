@@ -55,10 +55,23 @@ import { Text } from '@datavant/dart';
 ```typescript
 import { Badge } from '@datavant/dart';
 
-<Badge color="green">Active</Badge>
-<Badge color="blue">Provisioned</Badge>
-<Badge color="yellow">Pending</Badge>
+// Props
+<Badge
+  status="neutral" | "prominent" | "negative" | "caution" | "info"
+  type="number" | "dot"  // "number" shows text, "dot" shows only colored circle
+>
+  Badge text
+</Badge>
+
+// Examples
+<Badge status="prominent" type="number">Active</Badge>
+<Badge status="info" type="number">Provisioned</Badge>
+<Badge status="caution" type="number">Pending</Badge>
+<Badge status="neutral" type="number">Default</Badge>
+<Badge status="prominent" type="dot" /> {/* Just a colored dot */}
 ```
+
+**Important**: Must use `type="number"` to display text! Without it, badge shows as empty circle.
 
 ### Navigation
 

@@ -84,7 +84,7 @@ function App() {
                         <Title order={3} mb={4}>
                           Optum CDM
                         </Title>
-                        <Badge color="green" size="sm">
+                        <Badge status="prominent" type="number" size="sm">
                           Active
                         </Badge>
                       </div>
@@ -103,13 +103,13 @@ function App() {
                     </div>
 
                     <Group gap="xs" mt="xs">
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Pharmacy
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Diagnoses
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Procedures
                       </Badge>
                     </Group>
@@ -125,7 +125,7 @@ function App() {
                         <Title order={3} mb={4}>
                           Merative MarketScan
                         </Title>
-                        <Badge color="blue" size="sm">
+                        <Badge status="info" type="number" size="sm">
                           Provisioned
                         </Badge>
                       </div>
@@ -144,13 +144,13 @@ function App() {
                     </div>
 
                     <Group gap="xs" mt="xs">
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Medical
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Lab Results
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Enrollment
                       </Badge>
                     </Group>
@@ -166,7 +166,7 @@ function App() {
                         <Title order={3} mb={4}>
                           HealthVerity
                         </Title>
-                        <Badge color="yellow" size="sm">
+                        <Badge status="caution" type="number" size="sm">
                           Request Access
                         </Badge>
                       </div>
@@ -185,13 +185,13 @@ function App() {
                     </div>
 
                     <Group gap="xs" mt="xs">
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         EHR
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Claims
                       </Badge>
-                      <Badge variant="light" size="xs">
+                      <Badge status="neutral" type="number" size="xs">
                         Labs
                       </Badge>
                     </Group>
