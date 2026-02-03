@@ -391,7 +391,7 @@ import {
 <ActionIcon aria-label="Close"><CloseIcon /></ActionIcon>
 ```
 
-Full icon list: `/Users/ernie.guaimano/Documents/Github/dart/packages/dart/src/icons/`
+To see all available icons, check the Dart Storybook or explore `/node_modules/@datavant/dart/dist/esm/icons/` in your project.
 
 ## Provider Setup
 
@@ -483,10 +483,10 @@ import '@datavant/dart/styles.css';
 
 ## Resources
 
-- **Storybook**: https://datavant.github.io/dart-storybook/main
+- **Dart Storybook**: https://datavant.github.io/dart-storybook/main
+- **Dart GitHub**: https://github.com/datavant/dart
 - **Mantine Docs** (for base component APIs): https://mantine.dev/
-- **Local Dart Repo**: `/Users/ernie.guaimano/Documents/Github/dart`
-- **This Repo**: `/Users/ernie.guaimano/Documents/Github/datavant-prototype`
+- **This Repo**: https://github.com/ernieguai/datavant-prototype
 
 ## When to Reference Mantine Docs
 

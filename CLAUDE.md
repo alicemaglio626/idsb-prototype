@@ -5,13 +5,18 @@ Claude should help designers and product managers build realistic prototypes of 
 ## Design System
 
 **Use Datavant Dart design system exclusively**
-- Import from `@datavant/dart`, NOT `@mantine/core` directly
-- Dart is built on Mantine v8, so Mantine docs apply: https://mantine.dev/
+- Import from `@datavant/dart`, NOT `@mantine/core` for styled components
+- Dart is built on Mantine v8, so Mantine docs apply for base APIs: https://mantine.dev/
 - Use `DatavantProvider` wrapper with `environment="staging"` or `environment="production"`
-- Import styles: `import '@datavant/dart/styles.layer.css';`
+- **CRITICAL**: Import styles: `import '@datavant/dart/styles.css';` (NOT styles.layer.css!)
 - Dart Storybook: https://datavant.github.io/dart-storybook/main
-- Local Dart repo: `/Users/ernie.guaimano/Documents/Github/dart`
-- Local Storybook repo: `/Users/ernie.guaimano/Documents/Github/dart-storybook`
+- Dart GitHub: https://github.com/datavant/dart
+
+**Before building any new components or screens:**
+1. Read `DART_COMPONENTS.md` in this repo
+2. Check the Quick Reference Table for components you'll use
+3. Review the "Common Mistakes" section
+4. Use the "Before Building Checklist"
 
 ## Domain Context
 
@@ -55,25 +60,30 @@ Use realistic healthcare terminology:
 Follow this pattern for new screens:
 ```typescript
 // src/pages/ExampleScreen.tsx
-import '@datavant/dart/styles.layer.css';
-import { DatavantProvider } from '@datavant/dart';
-import { Container, Title, Card } from '@mantine/core';
+import { Container, Stack } from '@mantine/core';
+import { Title, Button, Badge } from '@datavant/dart';
 
 export function ExampleScreen() {
   return (
-    <DatavantProvider environment="staging">
-      <Container size="lg">
+    <Container size="lg">
+      <Stack gap="lg">
         <Title order={1}>Screen Title</Title>
-        {/* Content */}
-      </Container>
-    </DatavantProvider>
+        <Button intent="prominent" appearance="solid">Action</Button>
+        <Badge status="info" type="number">Status</Badge>
+      </Stack>
+    </Container>
   );
 }
 ```
 
+Note: `DatavantProvider` wraps the entire app in `App.tsx`, not individual screens.
+
 ## Anti-Patterns
 
-- ❌ Don't import from `@mantine/core` for components that Dart provides
+- ❌ Don't import styled components from `@mantine/core` (use `@datavant/dart`)
+- ❌ Don't use Mantine's `variant` prop on Button/Badge (use Dart's custom props)
+- ❌ Don't forget `type="number"` on Badge when displaying text
+- ❌ Don't use `styles.layer.css` (use `styles.css`)
 - ❌ Don't build real backend/authentication
 - ❌ Don't add heavy state management
 - ❌ Don't optimize prematurely
@@ -99,6 +109,54 @@ npm run dev
 
 Open http://localhost:5173
 
+## Documentation Maintenance
+
+When working on this repo in **future Claude Code sessions**, follow these guidelines:
+
+### Where to Document Changes
+
+| Change Type | Document In | Example |
+|-------------|-------------|---------|
+| Dart component usage patterns | `DART_COMPONENTS.md` | New component props, common mistakes |
+| Project-specific instructions | `CLAUDE.md` (this file) | Workflow changes, new conventions |
+| Setup/installation steps | `README.md` | New dependencies, auth steps |
+| Code-level decisions | Comments in code | Why a specific implementation was chosen |
+
+### When to Update DART_COMPONENTS.md
+
+Update this file when:
+- A new Dart component is added to the project
+- Component prop requirements change (e.g., new required prop)
+- Common mistakes are discovered during development
+- Styling/import issues are encountered and resolved
+- Best practices are established for component usage
+
+**Format**: Follow the existing structure with wrong/correct examples.
+
+### When to Update CLAUDE.md
+
+Update this file when:
+- Project conventions change (new file structure, naming patterns)
+- Development workflow changes (new make commands, different dev server)
+- Domain knowledge expands (new healthcare terminology, workflow stages)
+- Anti-patterns are discovered
+
+### When to Update README.md
+
+Update this file when:
+- Setup steps change
+- New dependencies are added
+- Authentication requirements change
+- Troubleshooting steps are discovered
+
+### Checking for Outdated Documentation
+
+Before making changes, Claude should:
+1. Read all three documentation files (CLAUDE.md, DART_COMPONENTS.md, README.md)
+2. Check if any instructions contradict what's in the code
+3. Update documentation if discrepancies are found
+4. Add new learnings to appropriate files
+
 ## Target Users
 
-Designers and PMs with varying technical skills will use this repo with Claude Code. Keep patterns simple and well-documented.
+Designers and PMs with varying technical skills will use this repo with Claude Code. Keep patterns simple and well-documented. Documentation should be portable and work for any user, not just the original author.
