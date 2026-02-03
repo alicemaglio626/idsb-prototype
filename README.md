@@ -1,10 +1,35 @@
-# Datavant Prototyping Repository
+# Datavant Prototype Template
 
-A prototyping environment for building realistic mockups of the Datavant integrated platform using the Dart design system.
+A **template repository** for building realistic, interactive prototypes of Datavant products using the Dart design system and Claude Code.
+
+## 🎯 What Is This?
+
+This is a **base template** that makes it fast and easy for designers and product managers to build prototypes without starting from scratch. Click "Use this template" to create your own prototype repository with all the setup, documentation, and best practices pre-configured.
+
+## 🚀 Quick Start
+
+### For Prototype Builders
+
+1. **📖 Read First**: [GETTING_STARTED.md](GETTING_STARTED.md)
+2. **🔧 Use Template**: Click "Use this template" button above
+3. **👨‍💻 Build**: Follow [HOW_TO_USE_WITH_CLAUDE.md](HOW_TO_USE_WITH_CLAUDE.md)
+4. **🤝 Share**: Contribute patterns back via [CONTRIBUTING.md](CONTRIBUTING.md)
+
+### For Team Members
+
+**📊 Overview**: Read [TEAM_OVERVIEW.md](TEAM_OVERVIEW.md) for the big picture
 
 ## Purpose
 
-This repository enables designers and product managers to quickly prototype features for Datavant's healthcare data platform. It uses Mock Service Worker (MSW) to simulate realistic API interactions without requiring a backend.
+This template repository enables designers and product managers to quickly prototype features for Datavant's healthcare data platform. It uses Mock Service Worker (MSW) to simulate realistic API interactions without requiring a backend.
+
+**This template includes:**
+- ✅ Pre-configured Dart design system
+- ✅ Mock API setup with MSW
+- ✅ Comprehensive component documentation
+- ✅ Claude Code integration guides
+- ✅ Example screens to learn from
+- ✅ Best practices and patterns
 
 ## Tech Stack
 
@@ -50,15 +75,41 @@ nvm use
 
 ## Project Structure
 
-- `src/pages/` - Screen components
-- `src/components/` - Reusable components organized by domain
-- `src/mocks/` - MSW handlers and mock data
-- `src/types/` - TypeScript type definitions
-- `.claude/skills/` - Claude Code skills for AI-assisted development (future)
+```
+datavant-prototype/
+├── docs/
+│   └── standards/              # Design standards (to be documented)
+│       ├── interaction-patterns.md
+│       ├── component-usage.md
+│       ├── writing-style.md
+│       └── data-formatting.md
+├── src/
+│   ├── pages/
+│   │   └── _examples/          # Example pages (delete in your prototype)
+│   ├── components/
+│   │   ├── templates/          # Reusable page templates (coming soon)
+│   │   └── patterns/           # Common UI patterns (coming soon)
+│   ├── mocks/                  # MSW handlers and mock data
+│   └── types/                  # TypeScript type definitions
+├── GETTING_STARTED.md          # Guide for prototype builders
+├── HOW_TO_USE_WITH_CLAUDE.md   # Claude Code prompts
+├── CONTRIBUTING.md             # How to improve template
+├── TEAM_OVERVIEW.md            # Team summary document
+└── DART_COMPONENTS.md          # Component reference
+```
+
+## 📚 Documentation
+
+- **[TEAM_OVERVIEW.md](TEAM_OVERVIEW.md)** - High-level summary for sharing with team
+- **[GETTING_STARTED.md](GETTING_STARTED.md)** - Step-by-step guide for prototype builders
+- **[HOW_TO_USE_WITH_CLAUDE.md](HOW_TO_USE_WITH_CLAUDE.md)** - Prompts for working with Claude Code
+- **[DART_COMPONENTS.md](DART_COMPONENTS.md)** - Complete Dart component reference
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to improve the template
+- **[CLAUDE.md](CLAUDE.md)** - Project conventions (for Claude Code)
 
 ## Working with Claude Code
 
-This repo is optimized for building prototypes with Claude Code CLI. See `CLAUDE.md` for detailed instructions for Claude.
+This repo is optimized for building prototypes with Claude Code CLI. See **[HOW_TO_USE_WITH_CLAUDE.md](HOW_TO_USE_WITH_CLAUDE.md)** for prompts and workflows.
 
 ## Domain Context
 
@@ -82,20 +133,33 @@ This project uses **Dart** (Datavant React Toolkit), our component library built
 
 ### Using Dart Components
 
+**⚠️ IMPORTANT**: Read [DART_COMPONENTS.md](DART_COMPONENTS.md) before using components!
+
 ```typescript
-import '@datavant/dart/styles.layer.css';
-import { DatavantProvider } from '@datavant/dart';
-import { Button, Card, Title } from '@mantine/core';
+// CORRECT
+import '@datavant/dart/styles.css';  // NOT styles.layer.css!
+import { Container, Stack } from '@mantine/core';
+import { Button, Badge, Text } from '@datavant/dart';
 
 function MyComponent() {
   return (
-    <DatavantProvider environment="staging">
-      <Title>My Title</Title>
-      <Button>Click me</Button>
-    </DatavantProvider>
+    <Container>
+      <Stack gap="md">
+        <Text>Some text</Text>
+        <Button intent="prominent" appearance="solid">Click me</Button>
+        <Badge status="info" type="number">Status</Badge>
+      </Stack>
+    </Container>
   );
 }
 ```
+
+**Key points:**
+- Import styled components from `@datavant/dart`, not `@mantine/core`
+- Use `styles.css`, NOT `styles.layer.css`
+- Button uses `intent` + `appearance`, not `variant`
+- Badge needs `type="number"` to show text
+- See [DART_COMPONENTS.md](DART_COMPONENTS.md) for complete reference
 
 ## Mock Data
 
