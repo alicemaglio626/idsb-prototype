@@ -5,9 +5,9 @@ import {
   Button,
   Badge,
   ActionIcon,
-  BellIcon,
   PlusIcon,
 } from '@datavant/dart';
+import { IconBell } from '@tabler/icons-react';
 import { useState } from 'react';
 
 interface NextAction {
@@ -138,7 +138,7 @@ export function ProjectDashboard({ onProjectClick }: ProjectDashboardProps) {
                 size="lg"
                 onClick={() => setNotificationsOpen(true)}
               >
-                <BellIcon />
+                <IconBell size={20} />
               </ActionIcon>
             </Indicator>
             <Button
