@@ -90,6 +90,19 @@ Note: `DatavantProvider` wraps the entire app in `App.tsx`, not individual scree
 
 ## Development
 
+### Git Workflow
+**IMPORTANT: Commit frequently after each change**
+- Make a git commit after completing each feature or fix
+- This allows easy rollback if needed
+- Use descriptive commit messages
+- Always include Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+Example workflow:
+1. Make changes to implement a feature
+2. Test that it works
+3. `git add -A && git commit -m "Descriptive message"`
+4. Continue to next feature
+
 ### Node Version
 This project requires Node 22+. Use:
 ```bash
