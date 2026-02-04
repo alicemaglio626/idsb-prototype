@@ -1,38 +1,85 @@
 import '@datavant/dart/styles.css';
-import { Stack, Title, Card, Grid, Box, Group } from '@mantine/core';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Box } from '@mantine/core';
 import {
   DatavantProvider,
   SideNav,
   NavItem,
-  Button,
-  Text,
-  Badge,
   SearchIcon,
   FolderIcon,
   FileCabinetIcon,
   LockIcon,
   HelpIcon,
+  PlusIcon,
 } from '@datavant/dart';
+import { ProjectDashboard } from './pages/ProjectDashboard';
+import { CreateStudy } from './pages/CreateStudy';
+import { HEORDataDiscovery } from './pages/HEORDataDiscovery';
+import { HEORContracting } from './pages/HEORContracting';
+import { HEORDataCombination } from './pages/HEORDataCombination';
+import { HEORPrivacy } from './pages/HEORPrivacy';
+import { HEORAutomaticInsights } from './pages/HEORAutomaticInsights';
+import { HEOREvidenceGeneration } from './pages/HEOREvidenceGeneration';
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleProjectClick = (projectId: string) => {
+    if (projectId === 'heor') {
+      navigate('/heor/discovery');
+    } else if (projectId === 'gps') {
+      // Will add GPS flow later
+      console.log('GPS project clicked - not yet implemented');
+    }
+  };
+
   return (
     <DatavantProvider environment="staging">
-      <Group gap={0} style={{ height: '100vh', overflow: 'hidden' }} align="stretch">
+      <Box style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
         <SideNav
           topSections={[
             {
-              children: <NavItem label="Data Discovery" leftSection={<SearchIcon />} active />,
+              children: (
+                <NavItem
+                  label="Dashboard"
+                  leftSection={<SearchIcon />}
+                  active={location.pathname === '/'}
+                  onClick={() => navigate('/')}
+                />
+              ),
             },
             {
               label: 'PLATFORM',
               children: [
-                <NavItem label="My Studies" leftSection={<FolderIcon />} key="studies" />,
+                <NavItem
+                  label="My Studies"
+                  leftSection={<FolderIcon />}
+                  key="studies"
+                  active={location.pathname === '/my-studies'}
+                  onClick={() => navigate('/my-studies')}
+                />,
+                <NavItem
+                  label="Create New Study"
+                  leftSection={<PlusIcon />}
+                  key="create-study"
+                  active={location.pathname === '/create-study'}
+                  onClick={() => navigate('/create-study')}
+                />,
                 <NavItem
                   label="Data Sources"
                   leftSection={<FileCabinetIcon />}
                   key="data-sources"
+                  active={location.pathname === '/data-sources'}
+                  onClick={() => navigate('/data-sources')}
                 />,
-                <NavItem label="Privacy & Compliance" leftSection={<LockIcon />} key="privacy" />,
+                <NavItem
+                  label="Privacy & Compliance"
+                  leftSection={<LockIcon />}
+                  key="privacy"
+                  active={location.pathname === '/privacy'}
+                  onClick={() => navigate('/privacy')}
+                />,
               ],
             },
           ]}
@@ -43,165 +90,33 @@ function App() {
           ]}
           userNavItemProps={{
             isExpanded: true,
-            username: 'Demo User',
-            email: 'demo@datavant.com',
-            initials: 'DU',
+            username: 'Vinay Mehta',
+            email: 'vinay.mehta@lilly.com',
+            initials: 'VM',
             onClick: () => console.log('User menu clicked'),
           }}
         />
 
-        <Box style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--mantine-color-gray-0)' }} p="xl">
-          <Stack gap="lg">
-            <div>
-              <Title order={1} mb="xs">
-                Data Discovery
-              </Title>
-              <Text size="lg" c="dimmed" mb="md">
-                Search and explore healthcare data sources for your research
-              </Text>
-              <Group gap="md">
-                <Button intent="prominent" appearance="solid">
-                  Primary Button
-                </Button>
-                <Button intent="prominent" appearance="outline">
-                  Outline Button
-                </Button>
-                <Button intent="neutral" appearance="outline">
-                  Neutral Button
-                </Button>
-                <Button intent="negative" appearance="solid">
-                  Negative Button
-                </Button>
-              </Group>
-            </div>
-
-            <Grid>
-              <Grid.Col span={4}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Stack gap="md">
-                    <Group justify="space-between" align="flex-start">
-                      <div>
-                        <Title order={3} mb={4}>
-                          Optum CDM
-                        </Title>
-                        <Badge status="prominent" type="number" size="sm">
-                          Active
-                        </Badge>
-                      </div>
-                    </Group>
-
-                    <div>
-                      <Text size="sm" fw={500} c="dimmed">
-                        Claims Database
-                      </Text>
-                      <Text size="sm" mt={4}>
-                        ~150,000 RA patients
-                      </Text>
-                      <Text size="xs" c="dimmed">
-                        Coverage: 2017-2025
-                      </Text>
-                    </div>
-
-                    <Group gap="xs" mt="xs">
-                      <Badge status="neutral" type="number" size="xs">
-                        Pharmacy
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Diagnoses
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Procedures
-                      </Badge>
-                    </Group>
-                  </Stack>
-                </Card>
-              </Grid.Col>
-
-              <Grid.Col span={4}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Stack gap="md">
-                    <Group justify="space-between" align="flex-start">
-                      <div>
-                        <Title order={3} mb={4}>
-                          Merative MarketScan
-                        </Title>
-                        <Badge status="info" type="number" size="sm">
-                          Provisioned
-                        </Badge>
-                      </div>
-                    </Group>
-
-                    <div>
-                      <Text size="sm" fw={500} c="dimmed">
-                        Commercial Claims
-                      </Text>
-                      <Text size="sm" mt={4}>
-                        ~200,000 patients
-                      </Text>
-                      <Text size="xs" c="dimmed">
-                        Coverage: 2015-2024
-                      </Text>
-                    </div>
-
-                    <Group gap="xs" mt="xs">
-                      <Badge status="neutral" type="number" size="xs">
-                        Medical
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Lab Results
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Enrollment
-                      </Badge>
-                    </Group>
-                  </Stack>
-                </Card>
-              </Grid.Col>
-
-              <Grid.Col span={4}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Stack gap="md">
-                    <Group justify="space-between" align="flex-start">
-                      <div>
-                        <Title order={3} mb={4}>
-                          HealthVerity
-                        </Title>
-                        <Badge status="caution" type="number" size="sm">
-                          Request Access
-                        </Badge>
-                      </div>
-                    </Group>
-
-                    <div>
-                      <Text size="sm" fw={500} c="dimmed">
-                        Multi-Source Registry
-                      </Text>
-                      <Text size="sm" mt={4}>
-                        ~80,000 patients
-                      </Text>
-                      <Text size="xs" c="dimmed">
-                        Coverage: 2018-2025
-                      </Text>
-                    </div>
-
-                    <Group gap="xs" mt="xs">
-                      <Badge status="neutral" type="number" size="xs">
-                        EHR
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Claims
-                      </Badge>
-                      <Badge status="neutral" type="number" size="xs">
-                        Labs
-                      </Badge>
-                    </Group>
-                  </Stack>
-                </Card>
-              </Grid.Col>
-            </Grid>
-          </Stack>
+        <Box
+          style={{
+            flex: 1,
+            height: '100vh',
+            overflow: 'auto',
+            backgroundColor: 'var(--mantine-color-gray-0)',
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<ProjectDashboard onProjectClick={handleProjectClick} />} />
+            <Route path="/create-study" element={<CreateStudy />} />
+            <Route path="/heor/discovery" element={<HEORDataDiscovery onContinue={() => navigate('/heor/contracting')} />} />
+            <Route path="/heor/contracting" element={<HEORContracting onContinue={() => navigate('/heor/data-combination')} />} />
+            <Route path="/heor/data-combination" element={<HEORDataCombination onContinue={() => navigate('/heor/privacy')} />} />
+            <Route path="/heor/privacy" element={<HEORPrivacy onContinue={() => navigate('/heor/insights')} />} />
+            <Route path="/heor/insights" element={<HEORAutomaticInsights onContinue={() => navigate('/heor/evidence')} />} />
+            <Route path="/heor/evidence" element={<HEOREvidenceGeneration onContinue={() => navigate('/')} />} />
+          </Routes>
         </Box>
-      </Group>
+      </Box>
     </DatavantProvider>
   );
 }
