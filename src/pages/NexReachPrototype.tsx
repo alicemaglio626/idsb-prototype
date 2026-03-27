@@ -263,7 +263,7 @@ function ScheduleModal({ count, onClose, onSubmit }: { count: number; onClose: (
         <Textarea label="Notes" required rows={4} value={`Pended inventory with code PNP 24 PAYMENT EXCEEDS LIMIT. Reason: 24 Payment Exceeds Limit. Efforts were made to negotiate the requested payment amount to a lower rate. Alternative retrieval methods were proposed to reduce costs and streamline the process.`} onChange={() => {}} />
         <Group justify="flex-end" gap="sm" pt="sm" style={{ borderTop: '1px solid #e7e5df' }}>
           <Button intent="neutral" appearance="ghost" onClick={onClose}>Cancel</Button>
-          <Button intent="prominent" appearance="solid" onClick={onSubmit || onClose}>Pend Record Request(s)</Button>
+          <Button intent="prominent" appearance="solid" onClick={() => onSubmit ? onSubmit(commitDate, paymentRequired === 'yes') : onClose()}>Pend Record Request(s)</Button>
         </Group>
       </ModalOverlay>
     );
