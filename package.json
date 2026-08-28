@@ -1,5 +1,5 @@
 {
-  "name": "datavant-prototype",
+  "name": "idsb-prototype",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "bash scripts/deploy.sh"
   },
   "dependencies": {
     "@datavant/dart": "^0.79.35",
