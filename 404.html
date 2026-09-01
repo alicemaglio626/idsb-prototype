@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Datavant Portal</title>
+  <script>
+    // GitHub Pages SPA redirect: encode the path into a query param so
+    // index.html can restore it via history.replaceState.
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.host + '/idsb-prototype/' +
+      '?p=' + encodeURIComponent(l.pathname.replace('/idsb-prototype', '') + l.search) +
+      (l.hash ? '&h=' + encodeURIComponent(l.hash) : '')
+    );
+  </script>
+</head>
+</html>
