@@ -6,6 +6,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'Aetna — Q2 2026 Records Batch',
         status: OrderStatus.IN_PROGRESS,
         due_date: '2026-05-01T00:00:00Z', // past due
+        start_date: '2026-01-05T00:00:00Z',
+        create_date: '2025-12-20T00:00:00Z',
+        client_name: 'Aetna',
+        project: 'Q2 2026 Audit',
+        product: 'Traditional',
+        audit_type: 'MRA',
+        record_requests: 12400,
         delivery_config: {
             pdf: {
                 schedule: [],
@@ -19,6 +26,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'BlueCross — Annual Audit Pull',
         status: OrderStatus.IN_PROGRESS,
         due_date: '2026-12-15T00:00:00Z', // future
+        start_date: '2026-06-01T00:00:00Z',
+        create_date: '2026-05-20T00:00:00Z',
+        client_name: 'BlueCross',
+        project: 'Annual Audit',
+        product: 'Traditional',
+        audit_type: 'ACA',
+        record_requests: 8200,
         delivery_config: {
             pdf: {
                 schedule: [],
@@ -32,6 +46,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'UnitedHealth — Chronic Conditions Cohort',
         status: OrderStatus.CLOSING,
         due_date: '2026-05-01T00:00:00Z',
+        start_date: '2026-01-15T00:00:00Z',
+        create_date: '2025-12-28T00:00:00Z',
+        client_name: 'UnitedHealth',
+        project: 'Chronic Conditions Cohort',
+        product: 'Traditional',
+        audit_type: 'MRA',
+        record_requests: 8750,
         delivery_config: { pdf: null },
     },
     {
@@ -39,6 +60,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'Cigna — Oncology Study Records',
         status: OrderStatus.COMPLETE,
         due_date: '2026-04-01T00:00:00Z',
+        start_date: '2025-11-01T00:00:00Z',
+        create_date: '2025-10-15T00:00:00Z',
+        client_name: 'Cigna',
+        project: 'Oncology Study',
+        product: 'DRG Payment Integrity',
+        audit_type: 'Payment Integrity',
+        record_requests: 3200,
         delivery_config: { pdf: null },
     },
     {
@@ -46,6 +74,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'Humana — Diabetes Monitoring',
         status: OrderStatus.NEW,
         due_date: '2026-09-30T00:00:00Z',
+        start_date: '2026-08-01T00:00:00Z',
+        create_date: '2026-07-25T00:00:00Z',
+        client_name: 'Humana',
+        project: 'Diabetes Monitoring',
+        product: 'Traditional',
+        audit_type: 'ACA',
+        record_requests: 5100,
         delivery_config: {
             pdf: {
                 schedule: [],
@@ -59,6 +94,13 @@ export const MOCK_ORDERS: OrderDetailResponse[] = [
         name: 'Molina — Behavioral Health Pilot',
         status: OrderStatus.CANCELED,
         due_date: '2026-03-15T00:00:00Z',
+        start_date: '2025-12-01T00:00:00Z',
+        create_date: '2025-11-18T00:00:00Z',
+        client_name: 'Molina',
+        project: 'Behavioral Health Pilot',
+        product: 'Traditional',
+        audit_type: 'MRA',
+        record_requests: 0,
         delivery_config: { pdf: null },
     },
 ];

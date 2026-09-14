@@ -77,7 +77,16 @@ function App() {
                     }}
                 >
                     <Routes>
-                        <Route path="/" element={<OrdersPage orders={orders} onResetDemoData={handleResetDemoData} />} />
+                        <Route
+                            path="/"
+                            element={
+                                <OrdersPage
+                                    orders={orders}
+                                    onResetDemoData={handleResetDemoData}
+                                    onEditOrder={(orderId) => navigate(`/orders/${orderId}`)}
+                                />
+                            }
+                        />
                         <Route
                             path="/orders/:id"
                             element={

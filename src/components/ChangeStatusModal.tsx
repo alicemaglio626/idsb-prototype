@@ -59,7 +59,7 @@ const ClosingImplications = (): JSX.Element => (
         </Stack>
         <Stack gap={6}>
             <Text size="xs" fw={700} tt="uppercase" c="red.6" style={{ letterSpacing: '0.04em' }}>Stops</Text>
-            <ImplicationRow ok={false} label="No new retrieval targets are activated" />
+            <ImplicationRow ok={false} label="No new retrieval targets are dispatched" />
             <ImplicationRow ok={false} label="Charts are not delivered automatically" />
             <ImplicationRow ok={false} label="Research tasks and pended records are no longer worked" />
         </Stack>

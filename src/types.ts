@@ -15,6 +15,13 @@ export interface OrderDetailResponse {
     status: OrderStatus;
     name: string;
     due_date: string; // ISO datetime string e.g. '2026-05-01T00:00:00Z'
+    start_date: string;
+    create_date: string;
+    client_name: string;
+    project: string;
+    product: string;
+    audit_type: string;
+    record_requests: number;
     delivery_config: {
         pdf?: {
             schedule?: string[];
