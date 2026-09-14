@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      // Restore path after GitHub Pages 404 redirect (see public/404.html).
+      // Must run before the app boots so BrowserRouter sees the real path.
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          var h = new URLSearchParams(window.location.search).get('h') || '';
+          window.history.replaceState(null, null, p + h);
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon-cyan.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
