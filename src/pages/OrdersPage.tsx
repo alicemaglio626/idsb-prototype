@@ -42,6 +42,14 @@ type SortDir = 'asc' | 'desc';
 
 // ─── Generic multi-select filter dropdown ─────────────────────────────────────
 
+const PILL_BUTTON_STYLE = {
+    borderRadius: 999,
+    border: '1px solid var(--mantine-color-gray-4)',
+    backgroundColor: 'var(--mantine-color-white)',
+    color: 'var(--mantine-color-gray-8)',
+    fontWeight: 500,
+};
+
 const FilterMenu = ({
     label,
     options,
@@ -55,7 +63,7 @@ const FilterMenu = ({
 }): JSX.Element => (
     <Menu closeOnItemClick={false} position="bottom-start">
         <Menu.Target>
-            <Button appearance="outline" intent="neutral" size="sm" rightSection={<IconChevronDown size={14} />}>
+            <Button appearance="outline" intent="neutral" size="sm" style={PILL_BUTTON_STYLE} rightSection={<IconChevronDown size={14} />}>
                 {label}{selected.length > 0 ? ` (${selected.length})` : ''}
             </Button>
         </Menu.Target>
@@ -83,7 +91,7 @@ const FilterMenu = ({
 const PlaceholderFilterMenu = ({ label }: { label: string }): JSX.Element => (
     <Menu position="bottom-start">
         <Menu.Target>
-            <Button appearance="outline" intent="neutral" size="sm" rightSection={<IconChevronDown size={14} />}>
+            <Button appearance="outline" intent="neutral" size="sm" style={PILL_BUTTON_STYLE} rightSection={<IconChevronDown size={14} />}>
                 {label}
             </Button>
         </Menu.Target>
@@ -273,7 +281,7 @@ export const OrdersPage = ({ orders, onResetDemoData, onEditOrder }: OrdersPageP
                     <FilterMenu label="Order Status" options={statusOptions} selected={statusFilter} onChange={v => { setStatusFilter(v); setPage(1); }} />
                     <PlaceholderFilterMenu label="Create Date" />
                     <PlaceholderFilterMenu label="Due Date" />
-                    <Button appearance="outline" intent="neutral" size="sm" onClick={handleResetFilters} aria-label="Reset filters">
+                    <Button appearance="outline" intent="neutral" size="sm" style={PILL_BUTTON_STYLE} onClick={handleResetFilters} aria-label="Reset filters">
                         <IconRefresh size={16} />
                     </Button>
                 </Group>

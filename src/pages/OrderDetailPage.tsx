@@ -58,9 +58,8 @@ export const OrderDetailPage = ({ orders, onStatusChange, onDueDateChange }: Ord
 
                 <Tabs defaultValue="actions">
                     <Tabs.List>
-                        <Tabs.Tab value="actions">Actions</Tabs.Tab>
                         <Tabs.Tab value="details" disabled>Details</Tabs.Tab>
-                        <Tabs.Tab value="history" disabled>History</Tabs.Tab>
+                        <Tabs.Tab value="actions">Actions</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value="actions" pt="md">

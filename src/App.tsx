@@ -73,7 +73,7 @@ function App() {
                         flex: 1,
                         height: '100vh',
                         overflow: 'auto',
-                        backgroundColor: 'var(--mantine-color-gray-0)',
+                        backgroundColor: 'var(--mantine-color-white)',
                     }}
                 >
                     <Routes>
