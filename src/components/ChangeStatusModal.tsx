@@ -23,10 +23,10 @@ const LABEL_STYLE = {
 };
 
 const getOptionDescription = (fromStatus: OrderStatus, toStatus: OrderStatus): string => {
-    if (toStatus === OrderStatus.CLOSING) return 'Ends dispatch; charts still arrive passively.';
+    if (toStatus === OrderStatus.CLOSING) return 'No new retrieval targets are dispatched; charts still arrive passively.';
     if (toStatus === OrderStatus.COMPLETE && fromStatus === OrderStatus.IN_PROGRESS) return 'Retrieval ends immediately.';
     if (toStatus === OrderStatus.COMPLETE && fromStatus === OrderStatus.CLOSING) return 'Finalizes the order.';
-    if (toStatus === OrderStatus.CANCELED) return 'Order is permanently canceled with no charts delivered.';
+    if (toStatus === OrderStatus.CANCELED) return 'Order is permanently canceled with no more charts delivered.';
     return '';
 };
 
@@ -45,7 +45,7 @@ const ClosingImplications = (): JSX.Element => (
     <Stack gap="md">
         <Stack gap={6}>
             <Text size="xs" fw={700} tt="uppercase" c="green.7" style={{ letterSpacing: '0.04em' }}>Starts</Text>
-            <ImplicationRow ok label="Chart delivery can be initiated by CS at any time" />
+            <ImplicationRow ok label="Chart delivery can be initiated via support ticket at any time" />
         </Stack>
         <Stack gap={6}>
             <Text size="xs" fw={700} tt="uppercase" c="blue.7" style={{ letterSpacing: '0.04em' }}>Continues</Text>
@@ -70,7 +70,7 @@ const SkipToCompleteImplications = (): JSX.Element => (
         <Stack gap={6}>
             <Text size="xs" fw={700} tt="uppercase" c="red.6" style={{ letterSpacing: '0.04em' }}>Stops</Text>
             <ImplicationRow ok={false} label="Retrieval stops immediately" />
-            <ImplicationRow ok={false} label="No charts are delivered to the client" />
+            <ImplicationRow ok={false} label="No additional charts are delivered to the client" />
         </Stack>
     </Stack>
 );
@@ -176,7 +176,7 @@ export const ChangeStatusModal = ({ order, opened, onClose, onStatusChange }: Ch
                     }}>
                         <IconInfoCircle size={16} color="var(--mantine-color-blue-6)" style={{ flexShrink: 0, marginTop: 1 }} />
                         <Text size="sm" c="blue.7">
-                            <strong>142 charts</strong> collected since the due date are ready for delivery. You can deliver them now from the Chart Delivery card, or initiate delivery at any time while the order is in Closing.
+                            <strong>142 charts</strong> collected since the due date are ready for delivery. You can also initiate a chart delivery request via support ticket at any time while the order is in Closing.
                         </Text>
                     </Group>
                     <Group justify="flex-end" gap={8}>

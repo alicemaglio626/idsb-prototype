@@ -6,7 +6,6 @@ import { type OrderDetailResponse, OrderStatus } from '../types';
 import { OrderStatusBadge, STATUS_DISPLAY } from './OrderStatusBadge';
 import { ChangeStatusModal } from './ChangeStatusModal';
 import { ChangeDueDateModal } from './ChangeDueDateModal';
-import { InitiateChartDeliveryModal } from './InitiateChartDeliveryModal';
 import { getAllowedTransitions, isDueDateMet } from './statusTransitions';
 import { formatDate } from '../utils/formatDate';
 
@@ -16,8 +15,7 @@ interface ActionsTabContentProps {
     onDueDateChange: (orderId: string, newDate: string) => void;
 }
 
-const statusDisabledReason = (order: OrderDetailResponse, deliveryInProgress: boolean): string | undefined => {
-    if (deliveryInProgress) return 'A chart delivery is in progress. Come back in 15–20 minutes to update the status.';
+const statusDisabledReason = (order: OrderDetailResponse): string | undefined => {
     if (getAllowedTransitions(order).length > 0) return undefined;
     if (order.status === OrderStatus.NEW) return 'Dispatch the order before changing its status.';
     return `${STATUS_DISPLAY[order.status].label} orders can't be moved to another status.`;
@@ -113,8 +111,8 @@ const StatCard = ({
     children: React.ReactNode;
     note?: React.ReactNode;
     disabledReason?: string;
-    buttonLabel: string;
-    onClick: () => void;
+    buttonLabel?: string;
+    onClick?: () => void;
 }): JSX.Element => (
     <Paper
         withBorder
@@ -136,20 +134,22 @@ const StatCard = ({
                     : <Box mt={2}>{note}</Box>
             ) : null}
         </Stack>
-        <Group justify="flex-end">
-            <Tooltip label={disabledReason ?? ''} disabled={!disabledReason} position="top">
-                <span>
-                    <Button
-                        appearance="outline"
-                        disabled={!!disabledReason}
-                        onClick={onClick}
-                        size="sm"
-                    >
-                        {buttonLabel}
-                    </Button>
-                </span>
-            </Tooltip>
-        </Group>
+        {buttonLabel && onClick && (
+            <Group justify="flex-end">
+                <Tooltip label={disabledReason ?? ''} disabled={!disabledReason} position="top">
+                    <span>
+                        <Button
+                            appearance="outline"
+                            disabled={!!disabledReason}
+                            onClick={onClick}
+                            size="sm"
+                        >
+                            {buttonLabel}
+                        </Button>
+                    </span>
+                </Tooltip>
+            </Group>
+        )}
     </Paper>
 );
 
@@ -160,19 +160,10 @@ const CHARTS_READY_INITIAL = 142;
 export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: ActionsTabContentProps): JSX.Element => {
     const [statusModalOpen, setStatusModalOpen] = useState(false);
     const [dueDateModalOpen, setDueDateModalOpen] = useState(false);
-    const [deliveryModalOpen, setDeliveryModalOpen] = useState(false);
-    const [chartsReady, setChartsReady] = useState(CHARTS_READY_INITIAL);
-    const [deliveryInProgress, setDeliveryInProgress] = useState(false);
+    const chartsReady = CHARTS_READY_INITIAL;
 
     const isClosing = order.status === OrderStatus.CLOSING;
     const currentDueDate = order.due_date.split('T')[0];
-
-    const handleDeliveryInitiated = (): void => {
-        setChartsReady(0);
-        setDeliveryInProgress(true);
-        // Prototype: re-enable after 20s (real: 15–20 min)
-        setTimeout(() => setDeliveryInProgress(false), 20_000);
-    };
 
     return (
         <Box py="md" style={{ maxWidth: isClosing ? 960 : 640 }}>
@@ -181,7 +172,7 @@ export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: Ac
                     <StatCard
                         label="Order Status"
                         icon={<IconActivity size={16} />}
-                        disabledReason={statusDisabledReason(order, deliveryInProgress)}
+                        disabledReason={statusDisabledReason(order)}
                         buttonLabel="Change Status"
                         onClick={() => setStatusModalOpen(true)}
                     >
@@ -193,10 +184,7 @@ export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: Ac
                         <StatCard
                             label="Chart Delivery"
                             icon={<IconSend size={16} />}
-                            note="You can initiate delivery multiple times as more charts arrive in Closing."
-                            disabledReason={chartsReady === 0 ? 'No charts ready for delivery.' : undefined}
-                            buttonLabel="Initiate Delivery"
-                            onClick={() => setDeliveryModalOpen(true)}
+                            note="Chart delivery can be initiated via support ticket at any time."
                         >
                             <Text fw={600}>{chartsReady} charts ready</Text>
                         </StatCard>
@@ -238,12 +226,6 @@ export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: Ac
                 opened={dueDateModalOpen}
                 onClose={() => setDueDateModalOpen(false)}
                 onDueDateChange={onDueDateChange}
-            />
-            <InitiateChartDeliveryModal
-                opened={deliveryModalOpen}
-                chartsReady={chartsReady}
-                onClose={() => setDeliveryModalOpen(false)}
-                onDeliveryInitiated={handleDeliveryInitiated}
             />
         </Box>
     );
