@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Build the IDSB prototype, encrypt with StatiCrypt (password: idsb), deploy to GitHub Pages.
+# Build the IDSB prototype and deploy to GitHub Pages. Password protection is
+# handled in-app (src/passwordGate.ts, password: idsb) — no StatiCrypt step
+# needed (it was also broken: staticrypt is a public package and this repo's
+# npm registry is pinned to a private CodeArtifact mirror that 401s on it).
 #
 #   Usage:  npm run deploy      (from repo root)
 set -euo pipefail
@@ -10,9 +13,6 @@ REMOTE="https://github.com/alicemaglio626/idsb-prototype.git"
 echo "→ Building static site..."
 cd "$HERE"
 NODE_ENV=production npm run build
-
-echo "→ Encrypting with StatiCrypt (password: idsb)..."
-npx staticrypt dist/index.html -p idsb --short -o dist/index.html --remember 0
 
 echo "→ Deploying to gh-pages branch..."
 TMP="$(mktemp -d)"
