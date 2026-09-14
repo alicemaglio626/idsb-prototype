@@ -31,7 +31,7 @@ const getOptionDescription = (fromStatus: OrderStatus, toStatus: OrderStatus): s
     if (toStatus === OrderStatus.CLOSING) return 'No new retrieval targets are dispatched; charts still arrive passively.';
     if (toStatus === OrderStatus.COMPLETE && fromStatus === OrderStatus.IN_PROGRESS) return 'Retrieval ends immediately.';
     if (toStatus === OrderStatus.COMPLETE && fromStatus === OrderStatus.CLOSING) return 'Finalizes the order.';
-    if (toStatus === OrderStatus.CANCELED) return 'Order is permanently canceled with no more charts delivered.';
+    if (toStatus === OrderStatus.CANCELED) return 'Order is permanently canceled and cannot be moved to another status.';
     return '';
 };
 
@@ -291,7 +291,12 @@ export const ChangeStatusModal = ({ order, opened, chartsReady, onClose, onStatu
                                     }}
                                     label={
                                         <Stack gap={3}>
-                                            <Text size="sm" fw={600}>{STATUS_DISPLAY[option].label}</Text>
+                                            <Group gap={6} wrap="nowrap">
+                                                <Text size="sm" fw={600}>{STATUS_DISPLAY[option].label}</Text>
+                                                {option === OrderStatus.CANCELED && (
+                                                    <IconAlertTriangle size={14} color="var(--mantine-color-red-6)" />
+                                                )}
+                                            </Group>
                                             <Text size="xs" c="dimmed" style={{ lineHeight: 1.5 }}>
                                                 {getOptionDescription(order.status, option)}
                                             </Text>
