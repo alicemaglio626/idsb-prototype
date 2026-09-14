@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Restore path after GitHub Pages 404 redirect (see public/404.html).
+      // Must run before the app boots so BrowserRouter sees the real path.
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          var h = new URLSearchParams(window.location.search).get('h') || '';
+          window.history.replaceState(null, null, p + h);
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/idsb-prototype/favicon-cyan.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datavant Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/idsb-prototype/assets/index-CxUlN21g.js"></script>
+    <link rel="stylesheet" crossorigin href="/idsb-prototype/assets/index-DuDGsT6i.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
