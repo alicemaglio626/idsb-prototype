@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Group, Modal, Stack, Text, showToast } from '@datavant/dart';
+import { Button, Group, Stack, Text, showToast } from '@datavant/dart';
+import { Modal } from './AppModal';
 
 const CLIENT_NAME = 'Datavant Demo Client';
 const TOTAL_RECORD_REQUESTS = 1842;

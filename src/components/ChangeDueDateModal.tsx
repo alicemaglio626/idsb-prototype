@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, DateInput, Divider, Group, Modal, showToast, Stack, Text } from '@datavant/dart';
+import { Box, Button, DateInput, Divider, Group, showToast, Stack, Text } from '@datavant/dart';
 import { IconArrowRight } from '@tabler/icons-react';
+import { Modal } from './AppModal';
 
 import { type OrderDetailResponse } from '../types';
 import { formatDate } from '../utils/formatDate';

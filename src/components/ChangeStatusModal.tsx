@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Divider, Group, Modal, Radio, showToast, Stack, Text } from '@datavant/dart';
+import { Box, Button, Divider, Group, Radio, showToast, Stack, Text } from '@datavant/dart';
 import { IconArrowRight, IconCheck, IconInfoCircle, IconX } from '@tabler/icons-react';
+import { Modal } from './AppModal';
 
 import { type OrderDetailResponse, OrderStatus } from '../types';
 import { formatDate } from '../utils/formatDate';
@@ -10,9 +11,13 @@ import { getAllowedTransitions, isDueDateMet } from './statusTransitions';
 interface ChangeStatusModalProps {
     order: OrderDetailResponse;
     opened: boolean;
+    chartsReady: number;
     onClose: () => void;
     onStatusChange: (orderId: string, newStatus: OrderStatus) => void;
+    onDeliverNow: () => void;
 }
+
+const CURRENT_YIELD_LABEL = '65% (1,205 of 1,842 records)';
 
 const LABEL_STYLE = {
     fontSize: 11,
@@ -98,7 +103,7 @@ const ClosingToCompleteImplications = (): JSX.Element => (
             <Stack gap={2}>
                 <Text size="sm" c="orange.8" fw={500}>Deliver charts before continuing</Text>
                 <Text size="sm" c="orange.8">
-                    There are <strong>142 charts</strong> ready for delivery. Charts cannot be delivered after an order is marked Complete — use the Chart Delivery card to deliver them first.
+                    There are <strong>142 charts</strong> ready for delivery. Charts cannot be delivered after an order is marked Complete — submit a support ticket to deliver them first.
                 </Text>
             </Stack>
         </Group>
@@ -121,7 +126,7 @@ const InlineImplications = ({
     return null;
 };
 
-export const ChangeStatusModal = ({ order, opened, onClose, onStatusChange }: ChangeStatusModalProps): JSX.Element => {
+export const ChangeStatusModal = ({ order, opened, chartsReady, onClose, onStatusChange, onDeliverNow }: ChangeStatusModalProps): JSX.Element => {
     const [target, setTarget] = useState<OrderStatus | null>(null);
     const [cancelConfirm, setCancelConfirm] = useState(false);
     const [showDeliveryPrompt, setShowDeliveryPrompt] = useState(false);
@@ -166,22 +171,36 @@ export const ChangeStatusModal = ({ order, opened, onClose, onStatusChange }: Ch
 
     // ── Delivery prompt after In Progress → Closing ───────────────────────────
     if (showDeliveryPrompt) {
+        const handleDeliverNow = (): void => {
+            onDeliverNow();
+            onClose();
+        };
+
         return (
             <Modal opened={opened} onClose={onClose} title="Order moved to Closing" centered size="md">
                 <Stack gap="lg">
-                    <Group gap="xs" align="flex-start" wrap="nowrap" p="sm" style={{
-                        background: 'var(--mantine-color-blue-0)',
-                        borderLeft: '3px solid var(--mantine-color-blue-4)',
-                        borderRadius: 4,
-                    }}>
-                        <IconInfoCircle size={16} color="var(--mantine-color-blue-6)" style={{ flexShrink: 0, marginTop: 1 }} />
-                        <Text size="sm" c="blue.7">
-                            <strong>142 charts</strong> collected since the due date are ready for delivery. You can also initiate a chart delivery request via support ticket at any time while the order is in Closing.
-                        </Text>
+                    <Text size="sm">
+                        <strong>{chartsReady} charts</strong> have been collected since the due date and are ready for delivery. Would you like to deliver them now?
+                    </Text>
+                    <Group gap="xl" align="flex-start">
+                        <Stack gap={2}>
+                            <Text size="sm" c="dimmed">Estimated delivery</Text>
+                            <Text size="sm" fw={500}>15–20 minutes</Text>
+                        </Stack>
+                        <Stack gap={2}>
+                            <Text size="sm" c="dimmed">Current yield</Text>
+                            <Text size="sm" fw={500}>{CURRENT_YIELD_LABEL}</Text>
+                        </Stack>
                     </Group>
-                    <Group justify="flex-end" gap={8}>
-                        <Button type="button" onClick={onClose}>
-                            Got it
+                    <Text size="sm" c="dimmed">
+                        You can also initiate a chart delivery request via support ticket at any time while the order is in Closing.
+                    </Text>
+                    <Group justify="space-between" gap={8}>
+                        <Button type="button" onClick={onClose} appearance="ghost" intent="neutral">
+                            Skip for now
+                        </Button>
+                        <Button type="button" onClick={handleDeliverNow}>
+                            Deliver {chartsReady} Charts
                         </Button>
                     </Group>
                 </Stack>

@@ -6,7 +6,7 @@ import {
     DatavantProvider,
     SideNav,
     NavItem,
-    FileTextIcon,
+    PaperIcon,
 } from '@datavant/dart';
 
 import { type OrderDetailResponse, OrderStatus } from './types';
@@ -37,6 +37,10 @@ function App() {
         );
     };
 
+    const handleResetDemoData = (): void => {
+        setOrders(MOCK_ORDERS.map(o => ({ ...o })));
+    };
+
     return (
         <DatavantProvider environment="staging">
             <Box style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
@@ -48,7 +52,7 @@ function App() {
                                 <NavItem
                                     key="orders"
                                     label="Orders"
-                                    leftSection={<FileTextIcon />}
+                                    leftSection={<PaperIcon />}
                                     active={location.pathname === '/' || location.pathname.startsWith('/orders')}
                                     onClick={() => navigate('/')}
                                 />,
@@ -73,7 +77,7 @@ function App() {
                     }}
                 >
                     <Routes>
-                        <Route path="/" element={<OrdersPage orders={orders} />} />
+                        <Route path="/" element={<OrdersPage orders={orders} onResetDemoData={handleResetDemoData} />} />
                         <Route
                             path="/orders/:id"
                             element={

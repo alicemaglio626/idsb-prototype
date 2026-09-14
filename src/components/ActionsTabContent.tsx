@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Group, Paper, Stack, Text, Tooltip } from '@datavant/dart';
-import { IconActivity, IconCalendar, IconSend } from '@tabler/icons-react';
+import { IconActivity, IconCalendar, IconInfoCircle, IconSend } from '@tabler/icons-react';
 
 import { type OrderDetailResponse, OrderStatus } from '../types';
 import { OrderStatusBadge, STATUS_DISPLAY } from './OrderStatusBadge';
@@ -58,7 +58,7 @@ const StatusCardNote = ({ order }: { order: OrderDetailResponse }): JSX.Element 
                     <Text size="sm" c="dimmed" fw={500}>This order can move to:</Text>
                     {dueMet ? (
                         <Stack gap={4}>
-                            <Bullet>Closing — ends dispatch; charts still arrive passively</Bullet>
+                            <Bullet>Closing — no new retrieval targets are dispatched; charts still arrive passively</Bullet>
                             <Bullet>Complete — skips Closing, ends retrieval immediately</Bullet>
                             <Bullet>Canceled — permanently cancels the order</Bullet>
                         </Stack>
@@ -160,14 +160,37 @@ const CHARTS_READY_INITIAL = 142;
 export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: ActionsTabContentProps): JSX.Element => {
     const [statusModalOpen, setStatusModalOpen] = useState(false);
     const [dueDateModalOpen, setDueDateModalOpen] = useState(false);
-    const chartsReady = CHARTS_READY_INITIAL;
+    const [chartsReady, setChartsReady] = useState(CHARTS_READY_INITIAL);
+    const [deliveryInProgress, setDeliveryInProgress] = useState(false);
 
     const isClosing = order.status === OrderStatus.CLOSING;
     const currentDueDate = order.due_date.split('T')[0];
 
+    const handleDeliveryInitiated = (): void => {
+        setChartsReady(0);
+        setDeliveryInProgress(true);
+        // Prototype: re-enable after 20s (real: 15–20 min)
+        setTimeout(() => setDeliveryInProgress(false), 20_000);
+    };
+
     return (
         <Box py="md" style={{ maxWidth: isClosing ? 960 : 640 }}>
             <Stack gap="md">
+                {deliveryInProgress && (
+                    <Group gap="xs" align="flex-start" wrap="nowrap" p="sm" style={{
+                        background: 'var(--mantine-color-blue-0)',
+                        borderLeft: '3px solid var(--mantine-color-blue-4)',
+                        borderRadius: 4,
+                    }}>
+                        <IconInfoCircle size={16} color="var(--mantine-color-blue-6)" style={{ flexShrink: 0, marginTop: 1 }} />
+                        <Stack gap={2}>
+                            <Text size="sm" c="blue.8" fw={500}>Chart delivery in progress</Text>
+                            <Text size="sm" c="blue.8">
+                                Transfer will complete in approximately 15–20 minutes. Status changes are unavailable until delivery is complete.
+                            </Text>
+                        </Stack>
+                    </Group>
+                )}
                 <Group align="stretch" gap="sm" wrap="nowrap">
                     <StatCard
                         label="Order Status"
@@ -184,7 +207,7 @@ export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: Ac
                         <StatCard
                             label="Chart Delivery"
                             icon={<IconSend size={16} />}
-                            note="Chart delivery can be initiated via support ticket at any time."
+                            note="Chart delivery can also be initiated via support ticket at any time as more charts arrive in Closing."
                         >
                             <Text fw={600}>{chartsReady} charts ready</Text>
                         </StatCard>
@@ -218,8 +241,10 @@ export const ActionsTabContent = ({ order, onStatusChange, onDueDateChange }: Ac
             <ChangeStatusModal
                 order={order}
                 opened={statusModalOpen}
+                chartsReady={chartsReady}
                 onClose={() => setStatusModalOpen(false)}
                 onStatusChange={onStatusChange}
+                onDeliverNow={handleDeliveryInitiated}
             />
             <ChangeDueDateModal
                 order={order}
