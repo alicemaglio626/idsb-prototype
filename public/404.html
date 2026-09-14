@@ -12,10 +12,9 @@
       (function () {
         var base = '/idsb-prototype/';
         var loc = window.location;
-        var path = loc.pathname.indexOf(base) === 0
-          ? loc.pathname.slice(base.length)
-          : loc.pathname.replace(/^\//, '');
-        loc.replace(base + '?p=/' + path + '&h=' + encodeURIComponent(loc.hash));
+        // Keep the full original path (base included) so BrowserRouter's
+        // basename still matches once index.html restores it.
+        loc.replace(base + '?p=' + encodeURIComponent(loc.pathname) + '&h=' + encodeURIComponent(loc.hash));
       })();
     </script>
   </head>
