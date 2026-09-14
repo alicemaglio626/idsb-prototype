@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Divider, Group, Radio, showToast, Stack, Text } from '@datavant/dart';
-import { IconArrowRight, IconCheck, IconInfoCircle, IconX } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowRight, IconCheck, IconInfoCircle, IconX } from '@tabler/icons-react';
 import { Modal } from './AppModal';
 
 import { type OrderDetailResponse, OrderStatus } from '../types';
@@ -227,9 +227,19 @@ export const ChangeStatusModal = ({ order, opened, chartsReady, onClose, onStatu
                         </Stack>
                     </Group>
                     <Divider />
-                    <Text size="sm" c="dimmed">
-                        This action cannot be undone. The order will be permanently canceled.
-                    </Text>
+                    <Group gap="xs" align="flex-start" wrap="nowrap" p="sm" style={{
+                        background: 'var(--mantine-color-red-0)',
+                        borderLeft: '3px solid var(--mantine-color-red-5)',
+                        borderRadius: 4,
+                    }}>
+                        <IconAlertTriangle size={16} color="var(--mantine-color-red-7)" style={{ flexShrink: 0, marginTop: 1 }} />
+                        <Stack gap={2}>
+                            <Text size="sm" c="red.8" fw={600}>Canceled is a terminal status</Text>
+                            <Text size="sm" c="red.8">
+                                This action cannot be undone. Once canceled, this order can never be moved to another status.
+                            </Text>
+                        </Stack>
+                    </Group>
                     <Group justify="flex-end" gap={8}>
                         <Button onClick={() => setCancelConfirm(false)} appearance="ghost" intent="neutral" type="button" disabled={isLoading}>
                             Back

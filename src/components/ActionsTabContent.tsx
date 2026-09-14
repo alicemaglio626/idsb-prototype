@@ -60,14 +60,22 @@ const StatusCardNote = ({ order }: { order: OrderDetailResponse }): JSX.Element 
                         <Stack gap={4}>
                             <Bullet>Closing — no new retrieval targets are dispatched; charts still arrive passively</Bullet>
                             <Bullet>Complete — skips Closing, ends retrieval immediately</Bullet>
-                            <Bullet>Canceled — permanently cancels the order</Bullet>
                         </Stack>
                     ) : (
-                        <Stack gap={4}>
-                            <Bullet>Canceled — permanently cancels the order</Bullet>
-                            <Text size="sm" c="dimmed">Closing and Complete become available on or after the due date.</Text>
-                        </Stack>
+                        <Text size="sm" c="dimmed">Closing and Complete become available on or after the due date.</Text>
                     )}
+                </Stack>
+            </Stack>
+        );
+    }
+
+    if (order.status === OrderStatus.NEW) {
+        return (
+            <Stack gap={6} mt={2}>
+                <Text size="sm" c="dimmed">This order hasn't been dispatched yet.</Text>
+                <Stack gap={4}>
+                    <Text size="sm" c="dimmed" fw={500}>This order can move to:</Text>
+                    <Bullet>Canceled — permanently cancels the order</Bullet>
                 </Stack>
             </Stack>
         );
@@ -88,7 +96,6 @@ const StatusCardNote = ({ order }: { order: OrderDetailResponse }): JSX.Element 
     const staticNote: Partial<Record<OrderStatus, string>> = {
         complete: 'Retrieval is complete. No further charts will be collected or delivered.',
         canceled: 'This order has been canceled.',
-        new: "This order hasn't been dispatched yet.",
     };
 
     const note = staticNote[order.status];

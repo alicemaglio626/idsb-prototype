@@ -6,10 +6,12 @@ export const getAllowedTransitions = (
     order: Pick<OrderDetailResponse, 'status' | 'due_date'>
 ): OrderStatus[] => {
     switch (order.status) {
+        case OrderStatus.NEW:
+            return [OrderStatus.CANCELED];
         case OrderStatus.IN_PROGRESS:
             return isDueDateMet(order.due_date)
-                ? [OrderStatus.CLOSING, OrderStatus.COMPLETE, OrderStatus.CANCELED]
-                : [OrderStatus.CANCELED];
+                ? [OrderStatus.CLOSING, OrderStatus.COMPLETE]
+                : [];
         case OrderStatus.CLOSING:
             return [OrderStatus.COMPLETE];
         default:
